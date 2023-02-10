@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01//vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h1>姓名：{{person.name}}</h1>
+        <h1>年龄：{{person.age}}</h1>
+        <h1>性别：{{person.gender}}</h1>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                person: {
+                    name: 'Leah',
+                    age: 23,
+                    gender: 'femal'
+                }
+            },
+            watch: {
+                // person: {
+                //     /* //监视多级结构中某个属性的变化
+                //     'person.age': {
+                //         handler() {
+                //             console.log('person的age属性被修改了')
+                //         }
+                //     } */
+
+                //     //监视多级结构中所有属性的变化
+                //     deep: true,
+                //     handler() {
+                //         console.log('有人修改了person的信息')
+                //     }
+                // }
+
+                // 简写形式
+                'person.age'() {
+                    console.log('person的age属性被修改了')
+                }
+            }
+        })
+
+        vm.$watch('person.age', function(newVal, oldVal){
+            console.log('person的age属性被修改了')
+        })
+    </script>
+</body>
+</html>

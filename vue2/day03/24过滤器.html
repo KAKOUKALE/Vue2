@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <script src="../js/dayjs.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2>计算属性实现</h2>
+        <h2>现在的时间是：{{fatTime}}</h2>
+        <h2>methods方法是实现</h2>
+        <h2>现在的时间是：{{getFmtTime()}}</h2>
+        <h2>过滤器实现</h2>
+        <h2>现在的时间是：{{time | timeFormater}}</h2>
+        <!-- 过滤器接收参数 -->
+        <h2>现在的时间是：{{time | timeFormater('YYYY_MM_DD')}}</h2>
+        <!-- 上一个完成过滤之后将得到的值作为参数传到下一个过滤器里 -->
+        <h2>现在的时间是：{{time | timeFormater('YYYY_MM_DD') | Myslice}}</h2>
+        <!-- 过滤器只能在插值语法和v-bind里面使用 -->
+        <h2 :x="aaa | Myslice">今天还可以吧</h2>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        // 全局过滤器
+        Vue.filter('Myslice', function(value) {
+            return value.slice(0, 4)
+        })
+         new Vue({
+            el: '#root',
+            data: {
+                time: 1675586050051,//时间戳
+                aaa: 'GoodDay'
+            },
+            computed: {
+                fatTime() {
+                    return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+                }
+            },
+            methods: {
+                getFmtTime() {
+                    return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+                }
+            },
+            filters: {
+                timeFormater(value, str = 'YYYY年MM月DD日 HH:mm:ss') {
+                    return dayjs(value).format(str)
+                },
+                Myslice(value) {
+                    return value.slice(0, 4)
+                }
+            }
+         })
+    </script>
+</body>
+</html>

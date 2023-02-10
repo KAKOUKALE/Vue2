@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2>很高兴认识你！{{name}}</h2>
+        <button v-on:click="interact">点我进行交互</button>
+        <button @click="interactA($event, 6)">点我进行交互</button>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'Leah'
+            },
+            methods: {
+                interact(event) {
+                    // alert('我也很高兴认识你!Lisa')
+
+                    // console.log(a, b, c, d) 
+                    //PointerEvent {isTrusted: true,  …} undefined undefined undefined
+
+                    console.log(event.target)
+                    // <button>点我进行交互</button>
+
+                    // console.log(this)    //Vue
+                },
+                interactA(event, val) {
+                    console.log(event, val)
+                    console.log(this)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

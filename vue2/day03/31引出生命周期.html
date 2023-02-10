@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">Hello! Leah</h2>
+    </div>
+
+    <script>
+        Vue.config,productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                opacity: 1
+            },
+            methods: {
+
+            },
+            // Vue完成模板的解析并把初始的真实DOM元素放入页面后（挂载完毕）调用 mounted
+            mounted() {
+                setInterval(() => {
+                    this.opacity -= 0.01
+                    if(this.opacity <= 0) this.opacity = 1
+                }, 16)
+            }
+        })
+    </script>
+</body>
+</html>

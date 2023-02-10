@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2 v-text="n"></h2>
+        <h2>当前n的值是：{{n}}</h2>
+        <button @click="add">点我n+1</button>
+        <button @click="bye">点我销毁vm</button>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data: {
+                n: 1
+            },
+            methods: {
+                add() {
+                    this.n++
+                    console.log('add')
+                },
+                bye() {
+                    console.log('bye')
+                    this.$destroy()
+                }
+            },
+            watch: {
+                n() {
+                    console.log('n变了')
+                }
+            },
+            beforeCreate() {
+                console.log('beforeCreate')
+                // console.log(this)
+                //此时的Vue还没有进行数据代理，无法通过vm访问到data中的数据和methods的方法
+                // debugger
+            },
+            // 初始化：数据监测、数据代理
+            created() {
+                // 此时：可以通过vm访问到data中的数据、methods中配置的方法
+                console.log('created')
+                // console.log(this)
+                // debugger
+            },
+            // 此阶段Vue开始解析模板，生成虚拟DOM（内存中），页面还不能显示解析好的内容
+            beforeMount() {
+                console.log('beforeMount')
+                // console.log(this)
+                // debugger
+                // 此时页面呈现的是未经Vue编译的DOM结构，对所有的DOM事件操作最终都不奏效
+            },
+            // 将内存中的虚拟DOM转为真实DOM插入页面
+            mounted() {
+                console.log('mounted')
+                console.log(this)
+                // debugger
+                /* 此时页面中呈现的是经过Vue编译的DOM
+                对DOM的操作均有效，（尽可能避免），至此初始化过程结束，
+                一般在此进行：
+                    开启定时器、发送网络请求、订阅消息、绑定自定义事件等初始化操作 */
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate')
+                console.log(this.n)
+                // debugger
+                // 此时数据是新的，但页面是旧的，即页面尚未和数据保持同步
+            },
+            // 根据新数据，生成新的虚拟DOM，随后与旧的虚拟DOM进行比较，
+            // 最终完成页面更新，即：完成了Model->View的更新
+            updated() {
+                console.log('updated')
+                // debugger
+                // 此时数据是新的，页面也是新的，即：页面和数据保持同步
+            },
+            // 当$destory()被调用时进行一下环节
+            beforeDestroy() {
+                console.log('beforeDestory')
+                /* 此时vm中所有的data、methods、指令等等，都处于可用状态，
+                马上要执行销毁过程，一般在此阶段：
+                    关闭定时器，取消订阅消息、解绑自定义事件等收尾操作 */
+                
+            },
+            destoryed() {
+                console.log('destory')
+            }
+        })
+    </script>
+</body>
+</html>

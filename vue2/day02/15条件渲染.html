@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2 v-show="true">欢迎来到 {{college}}！</h2>
+        <h2 v-if="true">{{name}} 同学，欢迎你！</h2>
+        <h4>n的值为：{{n}}</h4>
+        <button @click="n++">Click</button>
+        <h1 v-if="n===5">Frinday</h1>
+        <h1 v-else-if="n===6">Saturday</h1>
+        <h1 v-else-if="n===7">Sunday</h1>
+        <h1 v-else>Today is a good day!</h1>
+
+        <template v-if="n===8">
+            <h1>HTML</h1>
+            <h1>CSS</h1>
+            <h1>JavsScript</h1>
+        </template>
+    </div>
+    
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data: {
+                college: 'B站大学',
+                name: 'Leah',
+                n: 4
+            }
+        })
+    </script>
+</body>
+</html>

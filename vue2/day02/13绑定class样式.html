@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01//vue.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    .basic {
+        width: 200px;
+        height: 50px;
+        border: 3px solid #000;
+    }
+    .bfa {
+        background-color: #bfa;
+    }
+    .pink {
+        color: pink;
+    }
+    .orange {
+        border-color: orange;
+    }
+</style>
+<body>
+    <div id="root">
+        <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+        <div class="basic" :class="color" @click="bfa">
+            Hello!{{name}}
+        </div><br>
+        <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定、名字也不确定 -->
+        <div class="basic" :class="colorArr" @click="bfa">
+            Hello!{{name}}
+        </div><br>
+        <!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定、名字也确定，但要动态决定用不用 -->
+        <div class="basic" :class="colorObj" @click="bfa">
+            Hello!{{name}}
+        </div>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'Leah',
+                color: '',
+                colorArr: ['bfa', 'pink', 'orange'],
+                colorObj: {
+                    bfa: false,
+                    pink: false,
+                    orange: false
+                }
+            },
+            methods: {
+                bfa() {
+                    this.color = 'bfa'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

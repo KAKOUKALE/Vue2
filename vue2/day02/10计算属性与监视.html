@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div>姓：<input type="text" v-model="firstName" ></div><br> 
+        <div>名：<input type="text" v-model="lastName"></div><br>
+        <!-- <div>全名：<span>{{firstName.slice(0, 3)}}{{lastName.slice(0, 3)}}</span></div>      -->
+        <div>全名：{{fullName}}</div>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                firstName: '张',
+                lastName: '三',
+            },
+            /* methods: {
+                fullName() {
+                    return this.firstName + this.lastName
+                }
+            }, */
+            computed: {
+
+                // 完整写法
+                /* fullName: {
+                    //get有什么作用？当有人读取fullName时，get就会被调用，且返回值就作为fullName的值
+                    //get什么时候调用？1.初次读取fullName时。2.所依赖的数据发生变化时。
+                    get() {
+                        return this.firstName + this.lastName
+                    },
+                    //set什么时候调用? 当fullName被修改时。
+                     // 可以主动在控制台修改fullName来查看情况
+                    set(val) {
+                        console.log("修改了fullName属性！，" ,val)
+                    }
+                } */
+
+                // 简写  只考虑读取不考虑修改才可以使用简写形式
+                fullName() {
+                    return this.firstName + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01//vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <h2>人员列表</h2>
+        <ul>
+            <!-- 遍历数组 -->
+            <li v-for="(p, index) of persons" :key="">
+                {{p.name}} --- {{p.age}}
+                <!-- 马云 --- 40 -->
+            </li>
+            <!-- 遍历对象 -->
+            <li v-for="(piece, k) of threePiece" :key="">
+                {{k}}---{{piece}}
+                <!-- HTML---html -->
+            </li>
+            <!-- 遍历字符串 -->
+            <li v-for="(char, k) of str" :key="">
+                {{k}}---{{char}}
+                <!-- 0---a -->
+            </li>
+            <!-- 遍历指定次数 -->
+            <li v-for="(number, k) of 5">
+                {{k}}---{{number}}
+                <!-- 0---1 -->
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                persons: [
+                    {id: '001', name: '马云', age: '40'},
+                    {id: '002', name: '丁磊', age: '38'},
+                    {id: '003', name: '马化腾', age: '35'},
+                    {id: '004', name: '李彦宏', age: '54'},
+                    {id: '005', name: '张一鸣', age: '41'},
+                    {id: '005', name: '任正非', age: '56'}
+                ],
+                threePiece: {
+                    HTML: 'html',
+                    CSS: 'css',
+                    JavaScript: 'javascript'
+                },
+                str: 'abcdefg'
+            }
+        })
+    </script>
+</body>
+</html>

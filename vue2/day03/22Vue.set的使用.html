@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>姓名：{{name}}</h2>
+        <h2>年龄：{{age}}</h2>
+        <h2>学校：{{school.name}}</h2>
+        <h2>学校地址：<a :href="school.address">{{school.address}}</a></h2>
+        <h2 v-show="school.graduationTime">毕业时间：{{school.graduationTime}}</h2>
+        <button @click="addGraTime">点击添加毕业时间</button>
+        <hr>
+        <h3>朋友</h3>
+        <ul>
+            <li v-for="(f, index) in friends" :key="index">
+                {{f.name}}---{{f.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'Leah',
+                age: 23,
+                school: {
+                    name: 'B站大学',
+                    address: 'https://www.bilibili.com'
+                },
+                friends: [
+                    { name: 'Lily', age: 23 },
+                    { name: 'Nancy', age: 25 },
+                    { name: 'Lisa', age: 30 }
+                ]
+            },
+            methods: {
+                addGraTime() {
+                    Vue.set(this.school, 'graduationTime', '2023年')
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01//vue.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    .basic {
+        width: 200px;
+        height: 50px;
+        border: 3px solid #000;
+    }
+</style>
+<body>
+    <div id="root">
+        <div class="basic" :style="styleObj">
+            Hello!{{name}}
+        </div><br>
+        <div class="basic" :style="styleArr">
+            Hello!{{name}}
+        </div><br>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'Leah',
+                styleObj: {
+                    backgroundColor: '#bfa',
+                    color: 'blue'
+                },
+                styleArr: [
+                    {
+                        fontSize: '20px',
+                        color: 'red'
+                    },
+                    {
+                        backgroundColor: 'yellow',
+                        borderColor: 'pink'
+                    }
+                ]
+            },
+            methods: {
+                bfa() {
+                    this.color = 'bfa'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

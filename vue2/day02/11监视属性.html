@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>
+            <div>今天很{{mood}}</div>
+        </h1>
+        <!-- @click里面可以写一些简单的语句 -->
+        <!-- <button @click="isHappy = !isHappy">切换心情</button> -->
+        <button @click="changeMood">切换心情</button>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                isHappy: true
+            },
+            computed: {
+                mood() {
+                    return this.isHappy ? '开心' : '伤心'
+                }
+            },
+            methods: {
+                changeMood() {
+                    this.isHappy = !this.isHappy
+                }
+            },
+            watch: {
+                isHappy: {
+                    // 初始化时调用一下handler
+                    immediate: true,
+                    // isHappy被修改了调用handler
+                    handler(newVal, oldVal) {
+                        console.log('isHappy被修改了', newVal, oldVal)
+                    }
+                },
+                mood: {
+                    handler(newVal, oldVal) {
+                        console.log("mood的内容被修改了", newVal, oldVal)
+                    }
+                }
+            }
+        })
+        /* vm.$watch('isHappy', {
+            // 初始化时调用一下handler
+            immediate: true,
+            // isHappy被修改了调用handler
+            handler(newVal, oldVal) {
+                console.log('isHappy被修改了', newVal, oldVal)
+            }
+        }) */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit.prevent="submit">
+            <!-- trim 去掉前后的空格 -->
+            账号：<input type="text" v-model.trim="userInfo.account"><br><br>
+            密码：<input type="password" v-model="userInfo.password"><br><br>
+            <!-- 前一个number是控制输入框只能输入数字，后一个是数据类型为Number -->
+            年龄：<input type="number" v-model.number="userInfo.age"><br><br>
+            性别：
+            男<input type="radio" name="gender" value="male" v-model="userInfo.gender">
+            女<input type="radio" name="gender" value="female" v-model="userInfo.gender"><br><br>
+            爱好：
+            看电影<input type="checkbox" v-model="userInfo.hobby" value="movie">
+            听音乐<input type="checkbox" v-model="userInfo.hobby" value="music">
+            弹吉他<input type="checkbox" v-model="userInfo.hobby" v-model="hobby" value="guitar"><br><br>
+            所属地区
+            <select v-model="userInfo.address">
+                <option value="">请选择地区</option>
+                <option value="guangzhou">广州</option>
+                <option value="shenzhen">深圳</option>
+                <option value="chengdu">成都</option>
+                <option value="nanjing">南京</option>
+                <option value="nanchang">南昌</option>
+            </select><br><br>
+            其他信息
+            <!-- lazy 懒加载 失去焦点一瞬间收集数据 而非实时收集数 -->
+            <textarea cols="30" rows="10" v-model.lazy="userInfo.others"></textarea><br><br>
+            <input type="checkbox" v-model="userInfo.agree">阅读并接受<a href="javascript:;">《用户协议》</a><br><br>
+            <button>提交</button>
+        </form>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: "#root",
+            data: {
+                userInfo: {
+                    account: '',
+                    password: '',
+                    age: "",
+                    gender: 'female',
+                    hobby: [],
+                    address: 'guangzhou',
+                    others: '',
+                    agree: ''
+                }
+            },
+            methods: {
+                submit() {
+                    console.log(JSON.stringify(this.userInfo))
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

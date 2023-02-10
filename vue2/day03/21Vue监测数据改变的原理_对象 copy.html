@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let data = {
+            name: 'Leah',
+            age: 23
+        }
+
+        function Observer(obj) {
+            // 汇总对象中所有的属性形成一个数组
+            const keys = Object.keys(obj)
+            /**
+             * Object.keys()
+             * 1） 处理对象，返回可枚举的所有可枚举属性的字符串数组
+             * 2） 处理数组，返回索引值数组
+             * 3） 处理字符串，返回索引值数组
+             * 
+             * Object.values()
+             * Object.values()和Object.keys()是相反的操作，把一个对象的值转换为数组
+            */
+            // console.log(keys)
+            // 遍历
+            keys.forEach((k) => {
+                Object.defineProperty(this, k, {
+                    get() {
+                        return obj[k]
+                    },
+                    set(val) {
+                        console.log(`${k}被改了`)
+                        obj[k] = val
+                    }
+                })
+            })
+        }
+
+        // 创建一个监视的实例对象，用于监视data中属性的变化
+        const obs = new Observer(data)
+        console.log(obs)
+
+        // 准备一个vm实例
+        let vm = {}
+        vm._data = data = obs
+    </script>
+</body>
+
+</html>

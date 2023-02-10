@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../day01/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <app></app>
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        // 定义组件
+        const school = Vue.extend({
+            name: 'school',
+            template: `
+            <div>
+                <h2>学校：{{name}}</h2>
+                <h2>地址：{{address}}</h2>
+            </div>`,
+            data() {
+                return {
+                    name: 'school',
+                    address: '哔哩哔哩'
+                }
+            }
+        })
+        const student = Vue.extend({
+            name: 'student',
+            template: `
+            <div>
+                <h2>姓名：{{name}}</h2>
+                <h2>年龄：{{age}}</h2>
+                <school></school>
+            </div>`,
+            data() {
+                return {
+                    name: 'Leah',
+                    age: 23
+                }
+            },
+            components: {
+                school
+            }
+        })
+        const sayHello = Vue.extend({
+            name: 'sayHello',
+            template: `
+            <div>
+            <hr>
+            <h2>{{hello}}</h2>
+            </div>`,
+            data() {
+                return {
+                    hello: 'Hello! My name is Leah.'
+                }
+            }
+        })
+        const app = Vue.extend({
+            name: 'app',
+            template: `
+            <div>
+                <student></student>
+                <sayHello></sayHello>    
+            </div>`,
+            components: {
+                student,
+                sayHello
+            }
+        })
+        new Vue({
+            el: "#root",
+            template: `<app></app>`,
+            components: {
+                app
+            }
+        })
+    </script>
+</body>
+
+</html>
